@@ -1,5 +1,6 @@
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import posthog from 'posthog-js'
 import { navLinks } from '../constants/navLinks'
 
 const SECTION_IDS = [
@@ -17,6 +18,12 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [active, setActive] = useState('home')
+
+  const handleNavLinkClick = (label) => {
+    if (label === 'Contact') {
+      posthog.capture('contact_clicked')
+    }
+  }
 
   useEffect(() => {
     const onScroll = () => {
@@ -101,6 +108,7 @@ export default function Navbar() {
               <li key={link.href}>
                 <a
                   href={link.href}
+                  onClick={() => handleNavLinkClick(link.label)}
                   className={`relative text-sm drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)] ${linkClasses(link.href)}`}
                 >
                   {link.label}
@@ -147,7 +155,10 @@ export default function Navbar() {
                         ? 'bg-accent/10 font-medium text-accent'
                         : 'text-white/60 hover:text-accent'
                     }`}
-                    onClick={() => setOpen(false)}
+                    onClick={() => {
+                      setOpen(false)
+                      handleNavLinkClick(link.label)
+                    }}
                   >
                     {link.label}
                   </a>

@@ -5,6 +5,7 @@ import {
   ShieldCheck,
   ShoppingCart,
 } from 'lucide-react'
+import posthog from 'posthog-js'
 
 const headerIcons = {
   Layers,
@@ -96,9 +97,18 @@ function ArchitecturePreview({ architecture }) {
 export default function ProjectCard({ project, featured = false }) {
   const HeaderIcon = headerIcons[project.headerIcon]
 
+  const handleProjectClick = () => {
+    posthog.capture('project_clicked', {
+      project: project.shortName,
+      category: project.headerLabel,
+      featured: featured,
+    })
+  }
+
   return (
     <article
-      className={`glass flex h-full flex-col overflow-hidden rounded-xl ${
+      onClick={handleProjectClick}
+      className={`glass flex h-full flex-col overflow-hidden rounded-xl cursor-pointer ${
         featured ? 'border-accent/30' : ''
       }`}
     >
@@ -178,6 +188,10 @@ export default function ProjectCard({ project, featured = false }) {
               href={project.links.github}
               target="_blank"
               rel="noreferrer"
+              onClick={(e) => {
+                e.stopPropagation()
+                posthog.capture('github_clicked')
+              }}
               className="inline-flex items-center gap-2 text-sm text-muted transition hover:text-accent"
             >
               <Code2 size={16} />
@@ -189,6 +203,9 @@ export default function ProjectCard({ project, featured = false }) {
               href={project.links.live}
               target="_blank"
               rel="noreferrer"
+              onClick={(e) => {
+                e.stopPropagation()
+              }}
               className="inline-flex items-center gap-2 text-sm text-muted transition hover:text-accent"
             >
               <ExternalLink size={16} />

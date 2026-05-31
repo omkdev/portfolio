@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { useState } from 'react'
+import posthog from 'posthog-js'
 import heroVideo from '../assets/videos/HeroSectionVdo.mp4'
 import { heroSocialLinks } from '../constants/navLinks'
 import { defaultTransition, fadeUp } from '../lib/motion'
@@ -20,6 +21,16 @@ export default function Hero() {
   const reduceMotion = useReducedMotion()
   const [videoFailed, setVideoFailed] = useState(false)
   const showVideo = !reduceMotion && !videoFailed
+
+  const handleSocialClick = (label) => {
+    if (label === 'GitHub') {
+      posthog.capture('github_clicked')
+    } else if (label === 'LinkedIn') {
+      posthog.capture('linkedin_clicked')
+    } else if (label === 'Email') {
+      posthog.capture('contact_clicked')
+    }
+  }
 
   return (
     <section id="home" className="section-bg relative h-screen min-h-[680px] overflow-hidden">
@@ -52,6 +63,7 @@ export default function Hero() {
             href={link.href}
             target={link.href.startsWith('http') ? '_blank' : undefined}
             rel={link.href.startsWith('http') ? 'noreferrer noopener' : undefined}
+            onClick={() => handleSocialClick(link.label)}
             className="relative text-[10px] font-medium tracking-[0.14em] text-white/45 uppercase transition-colors hover:text-accent"
           >
             {link.label}
@@ -66,6 +78,7 @@ export default function Hero() {
             href={link.href}
             target={link.href.startsWith('http') ? '_blank' : undefined}
             rel={link.href.startsWith('http') ? 'noreferrer noopener' : undefined}
+            onClick={() => handleSocialClick(link.label)}
             initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ ...defaultTransition, delay: 0.3 + index * 0.08 }}
