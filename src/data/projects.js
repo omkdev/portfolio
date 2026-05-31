@@ -1,6 +1,10 @@
 export const projects = [
   {
     id: 'fynix-v2',
+    featured: true,
+    shortName: 'Fynix',
+    headerLabel: 'EVENT-DRIVEN FINANCE',
+    headerIcon: 'Layers',
     title: 'Fynix v2 — Event-Driven Personal Finance Platform',
     period: 'May 2026 — Present',
     problem:
@@ -9,6 +13,13 @@ export const projects = [
       'Built a production-grade finance platform with Java Spring Boot, Kafka, PostgreSQL, Redis, and Keycloak — featuring multi-tenant workspaces, OAuth2/OIDC auth, Outbox Pattern event publishing, AI expense categorization, DLQ retry handling, and observability via Prometheus, Grafana, and OpenTelemetry.',
     impact:
       'Delivered tenant-isolated workspaces with RBAC, idempotent APIs, immutable audit trails, and integration tests via Testcontainers (PostgreSQL + Kafka + Redis).',
+    architecture: {
+      trunk: ['Client', 'API Gateway', 'Spring Boot'],
+      branches: [
+        { label: 'Redis' },
+        { path: ['Kafka', 'PostgreSQL'] },
+      ],
+    },
     stack: [
       'Java',
       'Spring Boot',
@@ -24,9 +35,13 @@ export const projects = [
       live: null,
     },
     image: null,
+    headerAccent: 'border-amber-500/30 bg-amber-500/5',
   },
   {
     id: 'my-auth-app',
+    shortName: 'MyAuthApp',
+    headerLabel: 'OAUTH2 MOBILE SECURITY',
+    headerIcon: 'ShieldCheck',
     title: 'Secure Android Authentication (OAuth2/OIDC)',
     period: 'Apr 2026 — Present',
     problem:
@@ -41,11 +56,14 @@ export const projects = [
       live: null,
     },
     image: null,
+    headerAccent: 'border-orange-500/30 bg-orange-500/5',
   },
   {
     id: 'sudamafood',
+    shortName: 'SudamaFood',
+    headerLabel: 'ORDER MANAGEMENT',
+    headerIcon: 'ShoppingCart',
     title: 'SudamaFood — Menu & Order App',
-    badge: 'Early project',
     period: 'College Project',
     problem:
       'A local pohe shop needed digital menu, order, billing, and daily sales tracking instead of manual paper-based management.',
@@ -59,5 +77,6 @@ export const projects = [
       live: null,
     },
     image: null,
+    headerAccent: 'border-yellow-500/30 bg-yellow-500/5',
   },
 ]

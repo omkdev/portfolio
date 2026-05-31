@@ -4,13 +4,16 @@
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-heading: 'Space Grotesk', system-ui, sans-serif;
 
-  --color-bg: #0a0a0a;
-  --color-bg-elevated: #111111;
-  --color-charcoal: #1a1a1a;
-  --color-muted: #888888;
-  --color-text: #e5e5e5;
-  --color-accent: #3b82f6;
-  --color-accent-glow: rgba(59, 130, 246, 0.15);
+  --color-bg: #09090b;
+  --color-bg-elevated: #18181b;
+  --color-charcoal: #27272a;
+  --color-muted: #a1a1aa;
+  --color-text: #fafafa;
+  --color-accent: #f59e0b;
+  --color-accent-hover: #fbbf24;
+  --color-accent-soft: #451a03;
+  --color-accent-border: rgba(245, 158, 11, 0.2);
+  --color-accent-border-hover: rgba(245, 158, 11, 0.45);
 }
 
 @layer base {
@@ -35,12 +38,46 @@
 }
 
 @layer utilities {
-  .glass {
-    @apply border border-white/10 bg-white/5 backdrop-blur-md;
+  .section-bg {
+    background-color: var(--color-bg);
   }
 
-  .glow-blue {
-    box-shadow: 0 0 40px var(--color-accent-glow);
+  .section-bg-alt {
+    background-color: var(--color-bg-elevated);
+  }
+
+  .section-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .glass {
+    border: 1px solid var(--color-accent-border);
+    background-color: var(--color-charcoal);
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .glass:hover {
+    border-color: var(--color-accent-border-hover);
+    box-shadow:
+      0 0 0 1px rgba(245, 158, 11, 0.15),
+      0 10px 30px rgba(245, 158, 11, 0.08);
+  }
+
+  .text-gradient-accent {
+    background: linear-gradient(to right, #f59e0b, #fbbf24);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 100%);
   }
 
   .section-container {
@@ -48,7 +85,7 @@
   }
 
   .section-block {
-    @apply py-8 sm:py-10;
+    @apply border-t border-white/5 py-10 sm:py-12;
   }
 }
 

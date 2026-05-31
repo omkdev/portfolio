@@ -5,6 +5,7 @@ export const experience = [
     company: 'Trully Capital Fintech Pvt Ltd',
     location: 'Pune District, Maharashtra · On-site',
     period: 'Feb 2026 — Present',
+    current: true,
     description:
       'Backend & security systems for UDT & UDC — secure document sharing and financial workflows in the fintech domain.',
     highlights: [

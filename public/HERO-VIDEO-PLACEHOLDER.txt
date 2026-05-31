@@ -1,0 +1,2 @@
+Hero video lives at src/assets/videos/HeroSectionVdo.mp4 (imported by Hero.jsx).
+This placeholder file can be deleted.

@@ -1,16 +1,55 @@
-# React + Vite
+# Om Kanse — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio site for **Om Kanse**, Backend Engineer at Trully Capital. Built with React, Vite, Tailwind CSS, and Framer Motion.
 
-Currently, two official plugins are available:
+## Live site
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Deploy via Vercel (see `vercel.json`) or run locally with the commands below.
 
-## React Compiler
+## Development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+Open [http://localhost:5173](http://localhost:5173).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Build
+
+```bash
+npm run build
+npm run preview
+```
+
+## Project structure
+
+| Path | Purpose |
+|------|---------|
+| `src/sections/` | Page sections (Hero, Metrics, About, Experience, Projects, Skills, Contact) |
+| `src/data/` | Content data (experience, projects, skills, metrics) |
+| `src/constants/navLinks.js` | Navigation, profile, and social links |
+| `public/` | Static assets served as-is |
+
+## Assets to add locally
+
+These files are not committed (placeholders included). Add them before deploying for the full experience:
+
+| File | Location | Used by |
+|------|----------|---------|
+| `HeroSectionVdo.mp4` | `src/assets/videos/HeroSectionVdo.mp4` | Hero background video (falls back to gradient if missing) |
+| `resume.pdf` | `public/resume.pdf` | Resume button in Contact — update `socialLinks.resume` in `navLinks.js` to `/resume.pdf` |
+
+## Stack
+
+- **React 19** + **Vite 8**
+- **Tailwind CSS 4**
+- **Framer Motion** — scroll and entrance animations
+- **Lucide React** — icons
+- **react-countup** — animated metric counters
+
+## Contact
+
+- Email: [omkanse1010@gmail.com](mailto:omkanse1010@gmail.com)
+- LinkedIn: [linkedin.com/in/omkanse](https://www.linkedin.com/in/omkanse)
+- GitHub: [github.com/omkdev](https://github.com/omkdev)

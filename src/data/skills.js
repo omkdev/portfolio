@@ -1,22 +1,18 @@
 export const skillGroups = [
   {
     title: 'Backend',
-    skills: ['Node.js', 'Express', 'Java', 'Spring Boot', 'PHP (CodeIgniter)', 'MongoDB', 'MySQL'],
+    skills: ['Java', 'Spring Boot', 'Node.js', 'Express', 'REST APIs', 'WebSockets'],
   },
   {
     title: 'Security',
-    skills: ['OAuth2', 'JWT', 'PKCE', 'OTP', 'WebAuthn', 'RBAC', 'AES-256'],
+    skills: ['OAuth2', 'OIDC', 'JWT', 'RBAC', 'MFA', 'Keycloak'],
   },
   {
-    title: 'Distributed & Data',
-    skills: ['Kafka', 'PostgreSQL', 'Redis', 'Keycloak', 'WebSockets'],
+    title: 'Distributed Systems',
+    skills: ['Kafka', 'Redis', 'Caching', 'Event Driven Architecture'],
   },
   {
     title: 'Cloud & DevOps',
-    skills: ['AWS (EC2, S3, Elastic Beanstalk, RDS)', 'Nginx', 'GitHub Actions', 'Docker'],
-  },
-  {
-    title: 'Frontend & Mobile',
-    skills: ['React', 'Tailwind', 'Flutter', 'Kotlin'],
+    skills: ['AWS', 'Docker', 'GitHub Actions', 'CI/CD', 'Vercel', 'Linux'],
   },
 ]

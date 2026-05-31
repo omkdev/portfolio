@@ -2,7 +2,16 @@ import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { navLinks } from '../constants/navLinks'
 
-const SECTION_IDS = ['home', 'about', 'experience', 'projects', 'contact']
+const SECTION_IDS = [
+  'home',
+  'metrics',
+  'about',
+  'experience',
+  'projects',
+  'skills',
+  'principles',
+  'contact',
+]
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -58,15 +67,15 @@ export default function Navbar() {
   const linkClasses = (href) => {
     const isActive = active === href.slice(1)
 
-    if (onHero) {
-      return isActive
-        ? 'font-medium text-white'
-        : 'text-white/55 transition-colors hover:text-white'
+    if (isActive) {
+      return 'font-medium text-accent'
     }
 
-    return isActive
-      ? 'font-medium text-white'
-      : 'text-muted transition-colors hover:text-white'
+    if (onHero) {
+      return 'text-white/55 transition-colors hover:text-accent'
+    }
+
+    return 'text-muted transition-colors hover:text-accent'
   }
 
   return (
@@ -80,9 +89,7 @@ export default function Navbar() {
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8 lg:h-[72px] lg:px-10">
         <a
           href="#home"
-          className={`font-heading text-sm font-bold tracking-[0.18em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)] sm:text-base ${
-            onHero ? 'text-white' : 'text-white'
-          }`}
+          className="font-heading text-sm font-bold tracking-[0.18em] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)] sm:text-base"
         >
           OM KANSE
         </a>
@@ -98,11 +105,7 @@ export default function Navbar() {
                 >
                   {link.label}
                   {isActive && (
-                    <span
-                      className={`absolute -bottom-1.5 left-0 h-px w-full ${
-                        onHero ? 'bg-white/90' : 'bg-accent'
-                      }`}
-                    />
+                    <span className="absolute -bottom-1.5 left-0 h-px w-full bg-accent" />
                   )}
                 </a>
               </li>
@@ -121,9 +124,7 @@ export default function Navbar() {
 
           <button
             type="button"
-            className={`drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)] md:hidden ${
-              onHero ? 'text-white' : 'text-white'
-            }`}
+            className="text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)] md:hidden"
             onClick={() => setOpen((prev) => !prev)}
             aria-label={open ? 'Close menu' : 'Open menu'}
           >
@@ -142,7 +143,9 @@ export default function Navbar() {
                   <a
                     href={link.href}
                     className={`block rounded-lg px-3 py-3 text-lg ${
-                      isActive ? 'bg-white/10 font-medium text-white' : 'text-white/60'
+                      isActive
+                        ? 'bg-accent/10 font-medium text-accent'
+                        : 'text-white/60 hover:text-accent'
                     }`}
                     onClick={() => setOpen(false)}
                   >

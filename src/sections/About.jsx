@@ -22,11 +22,12 @@ const focusAreas = [
 
 export default function About() {
   return (
-    <section id="about" className="section-block">
+    <section id="about" className="section-block section-bg">
       <div className="section-container">
         <SectionTitle
           eyebrow="About"
           title="I build backend systems that fintech can trust."
+          highlight="fintech can trust"
           subtitle="Security, APIs, and production impact — from day one."
         />
 
@@ -39,7 +40,7 @@ export default function About() {
         >
           <motion.div
             variants={fadeUp}
-            className="glass glow-blue rounded-2xl p-6 leading-relaxed text-muted sm:p-8 lg:col-span-8"
+            className="glass rounded-xl p-6 leading-relaxed text-muted sm:p-8 lg:col-span-8"
           >
             <p className="mb-4">
               I've built production fintech systems that handle sensitive user data — from
@@ -66,7 +67,7 @@ export default function About() {
           </motion.div>
 
           <motion.div variants={fadeUp} className="flex flex-col gap-6 lg:col-span-4">
-            <div className="glass glow-blue rounded-2xl p-6">
+            <div className="glass rounded-xl p-6">
               <h3 className="font-heading mb-4 text-sm font-semibold tracking-wide text-white uppercase">
                 At a glance
               </h3>
@@ -82,7 +83,7 @@ export default function About() {
               </dl>
             </div>
 
-            <div className="glass glow-blue rounded-2xl p-6">
+            <div className="glass rounded-xl p-6">
               <h3 className="font-heading mb-4 text-sm font-semibold tracking-wide text-white uppercase">
                 Focus areas
               </h3>
@@ -90,7 +91,7 @@ export default function About() {
                 {focusAreas.map((area) => (
                   <li
                     key={area}
-                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-muted"
+                    className="rounded-full border border-white/10 bg-bg px-3 py-1 text-xs text-muted"
                   >
                     {area}
                   </li>

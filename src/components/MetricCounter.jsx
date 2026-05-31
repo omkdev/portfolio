@@ -4,7 +4,7 @@ const CountUp = CountUpModule.default?.default ?? CountUpModule.default ?? Count
 
 export default function MetricCounter({ value, decimals = 0, prefix = '', suffix = '' }) {
   return (
-    <span className="font-heading text-3xl font-bold text-white">
+    <span className="font-heading text-3xl font-bold text-accent">
       {prefix}
       <CountUp
         end={value}

@@ -1,4 +1,22 @@
-export default function SectionTitle({ eyebrow, title, subtitle }) {
+function renderTitle(title, highlight) {
+  if (!highlight || !title.includes(highlight)) {
+    return title
+  }
+
+  const index = title.indexOf(highlight)
+  const before = title.slice(0, index)
+  const after = title.slice(index + highlight.length)
+
+  return (
+    <>
+      {before}
+      <span className="text-gradient-accent">{highlight}</span>
+      {after}
+    </>
+  )
+}
+
+export default function SectionTitle({ eyebrow, title, subtitle, highlight }) {
   return (
     <div className="mb-6 max-w-2xl">
       {eyebrow && (
@@ -7,7 +25,7 @@ export default function SectionTitle({ eyebrow, title, subtitle }) {
         </p>
       )}
       <h2 className="font-heading text-3xl font-semibold text-white sm:text-4xl">
-        {title}
+        {renderTitle(title, highlight)}
       </h2>
       {subtitle && <p className="mt-3 text-muted">{subtitle}</p>}
     </div>

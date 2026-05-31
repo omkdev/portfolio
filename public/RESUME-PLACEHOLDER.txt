@@ -1,1 +1,2 @@
-Place your resume PDF here as resume.pdf (linked from Contact and navbar).
+Place your resume PDF here as resume.pdf, then set socialLinks.resume to '/resume.pdf' in src/constants/navLinks.js.
+Until then, the Resume button links to LinkedIn.

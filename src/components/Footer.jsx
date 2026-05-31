@@ -1,4 +1,4 @@
-import { socialLinks, profile } from '../constants/navLinks'
+import { profile } from '../constants/navLinks'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -9,12 +9,7 @@ export default function Footer() {
         <p className="text-sm text-muted">
           © {year} {profile.name} · Pune, India
         </p>
-        <p className="text-xs text-muted/80">
-          Built with React + Vite ·{' '}
-          <a href={socialLinks.github} className="text-text transition hover:text-accent">
-            @omkdev
-          </a>
-        </p>
+        <p className="text-xs text-muted/80">Designed &amp; Developed by {profile.name}</p>
       </div>
     </footer>
   )
