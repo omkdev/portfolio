@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import posthog from "posthog-js";
 import * as Sentry from "@sentry/react";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 posthog.init(
   import.meta.env.VITE_POSTHOG_KEY,
@@ -32,6 +34,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Sentry.ErrorBoundary fallback={<p>Something went wrong.</p>}>
       <App />
+      <Analytics />
+      <SpeedInsights />
     </Sentry.ErrorBoundary>
   </React.StrictMode>
 );
