@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import "./index.css";
 import posthog from "posthog-js";
 import * as Sentry from "@sentry/react";
 import { Analytics } from "@vercel/analytics/react";
