@@ -1,0 +1,1 @@
+Add project thumbnail images here (e.g. fynix-architecture.png) and set the image field in src/data/projects.js.
