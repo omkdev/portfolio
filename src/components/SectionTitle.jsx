@@ -16,9 +16,15 @@ function renderTitle(title, highlight) {
   )
 }
 
-export default function SectionTitle({ eyebrow, title, subtitle, highlight }) {
+export default function SectionTitle({
+  eyebrow,
+  title,
+  subtitle,
+  highlight,
+  className = '',
+}) {
   return (
-    <div className="mb-6 max-w-2xl">
+    <div className={`mb-6 max-w-2xl ${className}`.trim()}>
       {eyebrow && (
         <p className="mb-2 text-sm font-medium uppercase tracking-widest text-accent">
           {eyebrow}
