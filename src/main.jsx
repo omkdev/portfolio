@@ -23,13 +23,18 @@ Sentry.init({
 
   integrations: [
     Sentry.replayIntegration(),
+    Sentry.consoleLoggingIntegration({ levels: ["log", "warn", "error"] }),
   ],
+
+  enableLogs: true,
 
   replaysSessionSampleRate: 0.05,
   replaysOnErrorSampleRate: 1.0,
 
   sendDefaultPii: false,
 });
+
+Sentry.logger.info("User triggered test log", { log_source: "sentry_test" });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

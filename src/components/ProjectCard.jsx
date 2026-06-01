@@ -116,7 +116,7 @@ export default function ProjectCard({ project, featured = false }) {
         <div className="border-b border-white/10">
           <img
             src={project.image}
-            alt={`${project.title} preview`}
+            alt={`${project.title} — Om Mahesh Kanse project preview`}
             className="h-40 w-full object-cover object-center"
             loading="lazy"
           />

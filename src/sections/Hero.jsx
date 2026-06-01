@@ -12,9 +12,9 @@ const headline = [
 ]
 
 const heroSubtitle = [
-  'Building secure authentication systems,',
-  'real-time fintech platforms,',
-  'and production backend infrastructure.',
+  'Full-Stack Developer & Backend Engineer.',
+  'Node.js · React · Java · AWS · OAuth2 · JWT.',
+  'Secure, scalable systems for fintech production.',
 ]
 
 export default function Hero() {
