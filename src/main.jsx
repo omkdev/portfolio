@@ -34,8 +34,6 @@ Sentry.init({
   sendDefaultPii: false,
 });
 
-Sentry.logger.info("User triggered test log", { log_source: "sentry_test" });
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Sentry.ErrorBoundary fallback={<p>Something went wrong.</p>}>

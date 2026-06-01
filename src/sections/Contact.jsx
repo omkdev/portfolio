@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import { Turnstile } from '@marsidev/react-turnstile'
 import { AtSign, Code2, Download, Link, Mail, Send } from 'lucide-react'
 import posthog from 'posthog-js'
 import SectionTitle from '../components/SectionTitle'
@@ -24,10 +25,15 @@ const initialFormData = { name: '', email: '', message: '' }
 const fieldClass =
   'w-full rounded-xl border border-accent/20 bg-bg px-4 py-3 text-sm text-text placeholder:text-muted outline-none transition focus:border-accent/50'
 
+const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY
+const captchaRequired = Boolean(turnstileSiteKey)
+
 export default function Contact() {
   const [formData, setFormData] = useState(initialFormData)
   const [status, setStatus] = useState('idle')
   const [errorMessage, setErrorMessage] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
+  const turnstileRef = useRef(null)
 
   const getClickHandler = (label) => {
     if (label === 'Resume') return () => posthog.capture('resume_downloaded')
@@ -37,16 +43,31 @@ export default function Contact() {
     return undefined
   }
 
+  const resetTurnstile = () => {
+    setTurnstileToken('')
+    turnstileRef.current?.reset()
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setStatus('sending')
     setErrorMessage('')
+
+    if (captchaRequired && !turnstileToken) {
+      setStatus('error')
+      setErrorMessage('Please complete the captcha verification.')
+      return
+    }
+
+    setStatus('sending')
 
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          turnstileToken,
+        }),
       })
 
       const data = await response.json().catch(() => ({}))
@@ -67,9 +88,11 @@ export default function Contact() {
       })
 
       setFormData(initialFormData)
+      resetTurnstile()
       setStatus('success')
     } catch (error) {
       setStatus('error')
+      resetTurnstile()
       setErrorMessage(
         error instanceof Error ? error.message : 'Something went wrong. Please try again.',
       )
@@ -138,6 +161,7 @@ export default function Contact() {
               type="text"
               name="name"
               required
+              maxLength={100}
               autoComplete="name"
               aria-label="Your name"
               placeholder="Your name"
@@ -153,6 +177,7 @@ export default function Contact() {
               type="email"
               name="email"
               required
+              maxLength={254}
               autoComplete="email"
               aria-label="Your email"
               placeholder="Your email"
@@ -167,6 +192,7 @@ export default function Contact() {
               id="contact-message"
               name="message"
               required
+              maxLength={2000}
               rows={4}
               aria-label="Your message"
               placeholder="Your message"
@@ -176,6 +202,17 @@ export default function Contact() {
               }
               className={`${fieldClass} resize-y`}
             />
+
+            {captchaRequired && (
+              <Turnstile
+                ref={turnstileRef}
+                siteKey={turnstileSiteKey}
+                onSuccess={setTurnstileToken}
+                onExpire={() => setTurnstileToken('')}
+                onError={() => setTurnstileToken('')}
+                options={{ theme: 'dark' }}
+              />
+            )}
 
             {status === 'success' && (
               <p className="text-sm text-accent" role="status">
@@ -191,7 +228,9 @@ export default function Contact() {
 
             <button
               type="submit"
-              disabled={status === 'sending'}
+              disabled={
+                status === 'sending' || (captchaRequired && !turnstileToken)
+              }
               className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-bg transition hover:bg-accent-hover disabled:opacity-60"
             >
               <Send size={16} />
