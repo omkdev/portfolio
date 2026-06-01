@@ -19,9 +19,12 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [active, setActive] = useState('home')
 
-  const handleNavLinkClick = (label) => {
+  const handleNavLinkClick = (label, external) => {
     if (label === 'Contact') {
       posthog.capture('contact_clicked')
+    }
+    if (label === 'Blog' && external) {
+      posthog.capture('blog_clicked')
     }
   }
 
@@ -71,8 +74,8 @@ export default function Navbar() {
 
   const onHero = !scrolled
 
-  const linkClasses = (href) => {
-    const isActive = active === href.slice(1)
+  const linkClasses = (href, external) => {
+    const isActive = !external && active === href.slice(1)
 
     if (isActive) {
       return 'font-medium text-accent'
@@ -103,13 +106,17 @@ export default function Navbar() {
 
         <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-5 lg:gap-6 md:flex">
           {navLinks.map((link) => {
-            const isActive = active === link.href.slice(1)
+            const external = Boolean(link.external)
+            const isActive = !external && active === link.href.slice(1)
             return (
               <li key={link.href}>
                 <a
                   href={link.href}
-                  onClick={() => handleNavLinkClick(link.label)}
-                  className={`relative text-sm drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)] ${linkClasses(link.href)}`}
+                  {...(external
+                    ? { target: '_blank', rel: 'noreferrer' }
+                    : {})}
+                  onClick={() => handleNavLinkClick(link.label, external)}
+                  className={`relative text-sm drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)] ${linkClasses(link.href, external)}`}
                 >
                   {link.label}
                   {isActive && (
@@ -127,7 +134,7 @@ export default function Navbar() {
               onHero ? 'text-white/50' : 'text-muted'
             }`}
           >
-            Backend Engineer · Trully Capital
+            Software Engineer · Fintech company
           </span>
 
           <button
@@ -145,11 +152,15 @@ export default function Navbar() {
         <div className="fixed inset-0 top-16 z-40 bg-black/92 backdrop-blur-md md:hidden">
           <ul className="flex flex-col gap-1 px-6 py-8">
             {navLinks.map((link) => {
-              const isActive = active === link.href.slice(1)
+              const external = Boolean(link.external)
+              const isActive = !external && active === link.href.slice(1)
               return (
                 <li key={link.href}>
                   <a
                     href={link.href}
+                    {...(external
+                      ? { target: '_blank', rel: 'noreferrer' }
+                      : {})}
                     className={`block rounded-lg px-3 py-3 text-lg ${
                       isActive
                         ? 'bg-accent/10 font-medium text-accent'
@@ -157,10 +168,11 @@ export default function Navbar() {
                     }`}
                     onClick={() => {
                       setOpen(false)
-                      handleNavLinkClick(link.label)
+                      handleNavLinkClick(link.label, external)
                     }}
                   >
                     {link.label}
+                    {external ? ' ↗' : ''}
                   </a>
                 </li>
               )

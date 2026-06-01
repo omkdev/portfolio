@@ -4,6 +4,7 @@ export const navLinks = [
   { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
   { label: 'Skills', href: '#skills' },
+  { label: 'Blog', href: 'https://omkanse.hashnode.dev/', external: true },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -15,6 +16,7 @@ export const profile = {
 
 export const socialLinks = {
   email: 'mailto:omkanse1010@gmail.com',
+  blog: 'https://omkanse.hashnode.dev/',
   linkedin: 'https://www.linkedin.com/in/omkanse',
   x: 'https://x.com/OmKanse3',
   github: 'https://github.com/omkdev',
