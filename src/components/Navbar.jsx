@@ -1,6 +1,6 @@
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import posthog from 'posthog-js'
+import { capture } from '../lib/posthog'
 import { navLinks } from '../constants/navLinks'
 
 const SECTION_IDS = [
@@ -21,10 +21,10 @@ export default function Navbar() {
 
   const handleNavLinkClick = (label, external) => {
     if (label === 'Contact') {
-      posthog.capture('contact_clicked')
+      capture('contact_clicked')
     }
     if (label === 'Blog' && external) {
-      posthog.capture('blog_clicked')
+      capture('blog_clicked')
     }
   }
 

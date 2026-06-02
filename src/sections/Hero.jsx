@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { useState } from 'react'
-import posthog from 'posthog-js'
+import { capture } from '../lib/posthog'
 import heroVideo from '../assets/videos/HeroSectionVdo.mp4'
 import { heroSocialLinks } from '../constants/navLinks'
 import { defaultTransition, fadeUp } from '../lib/motion'
@@ -12,9 +12,9 @@ const headline = [
 ]
 
 const heroSubtitle = [
-  'Full-Stack Developer & Backend Engineer.',
-  'Node.js · React · Java · AWS · OAuth2 · JWT.',
-  'Secure, scalable systems for fintech production.',
+  'Software Engineer. Fintech. Security-first.',
+  'Java · Spring Boot · Kafka · AWS · OAuth2.',
+  'From auth flows to distributed backends.',
 ]
 
 export default function Hero() {
@@ -24,11 +24,11 @@ export default function Hero() {
 
   const handleSocialClick = (label) => {
     if (label === 'GitHub') {
-      posthog.capture('github_clicked')
+      capture('github_clicked')
     } else if (label === 'LinkedIn') {
-      posthog.capture('linkedin_clicked')
+      capture('linkedin_clicked')
     } else if (label === 'Email') {
-      posthog.capture('contact_clicked')
+      capture('contact_clicked')
     }
   }
 
@@ -119,12 +119,12 @@ export default function Hero() {
             <div className="mb-4 flex flex-col items-start gap-2 md:ml-auto md:items-end">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[11px] font-medium text-emerald-400">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
-                Available for Backend Engineering Roles
+                Available for Software Engineering Roles
               </span>
 
               <div className="inline-flex flex-col items-start gap-1 rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-left md:items-end">
                 <p className="text-xs font-semibold tracking-wide text-white">
-                  Backend Engineer @ Trully Capital
+                  Software Engineer · Fintech company
                 </p>
                 <p className="text-[11px] tracking-wide text-white/50">
                   OAuth2 · AWS · Distributed Systems

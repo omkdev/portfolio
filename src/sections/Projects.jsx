@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
-import posthog from 'posthog-js'
+import { capture } from '../lib/posthog'
 import ProjectCard from '../components/ProjectCard'
 import SectionTitle from '../components/SectionTitle'
 import { socialLinks } from '../constants/navLinks'
@@ -57,7 +57,7 @@ export default function Projects() {
             href={socialLinks.github}
             target="_blank"
             rel="noreferrer"
-            onClick={() => posthog.capture('github_clicked')}
+            onClick={() => capture('github_clicked')}
             className="inline-flex items-center gap-2 text-sm text-muted transition hover:text-accent"
           >
             View all repositories on GitHub

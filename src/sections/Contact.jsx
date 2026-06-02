@@ -1,13 +1,13 @@
 import { useRef, useState } from 'react'
 import { Turnstile } from '@marsidev/react-turnstile'
 import { AtSign, Code2, Download, Link, Mail, Send } from 'lucide-react'
-import posthog from 'posthog-js'
+import { capture, identify } from '../lib/posthog'
 import SectionTitle from '../components/SectionTitle'
 import { profile, socialLinks } from '../constants/navLinks'
 
 const availability = [
   'Full-Time Roles',
-  'Backend Engineering',
+  'Software Engineering',
   'Platform Engineering',
   'Security Engineering',
 ]
@@ -36,10 +36,10 @@ export default function Contact() {
   const turnstileRef = useRef(null)
 
   const getClickHandler = (label) => {
-    if (label === 'Resume') return () => posthog.capture('resume_downloaded')
-    if (label === 'GitHub') return () => posthog.capture('github_clicked')
-    if (label === 'LinkedIn') return () => posthog.capture('linkedin_clicked')
-    if (label === profile.email) return () => posthog.capture('contact_clicked')
+    if (label === 'Resume') return () => capture('resume_downloaded')
+    if (label === 'GitHub') return () => capture('github_clicked')
+    if (label === 'LinkedIn') return () => capture('linkedin_clicked')
+    if (label === profile.email) return () => capture('contact_clicked')
     return undefined
   }
 
@@ -76,13 +76,13 @@ export default function Contact() {
         throw new Error(data.error || 'Failed to send message')
       }
 
-      posthog.identify(formData.email, {
+      identify(formData.email, {
         name: formData.name,
         email: formData.email,
         source: 'portfolio_contact_form',
       })
 
-      posthog.capture('contact_form_submitted', {
+      capture('contact_form_submitted', {
         name: formData.name,
         email: formData.email,
       })
