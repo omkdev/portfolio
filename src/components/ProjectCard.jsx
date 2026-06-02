@@ -5,7 +5,7 @@ import {
   ShieldCheck,
   ShoppingCart,
 } from 'lucide-react'
-import posthog from 'posthog-js'
+import { capture } from '../lib/posthog'
 
 const headerIcons = {
   Layers,
@@ -98,7 +98,7 @@ export default function ProjectCard({ project, featured = false }) {
   const HeaderIcon = headerIcons[project.headerIcon]
 
   const handleProjectClick = () => {
-    posthog.capture('project_clicked', {
+    capture('project_clicked', {
       project: project.shortName,
       category: project.headerLabel,
       featured: featured,
@@ -190,7 +190,7 @@ export default function ProjectCard({ project, featured = false }) {
               rel="noreferrer"
               onClick={(e) => {
                 e.stopPropagation()
-                posthog.capture('github_clicked')
+                capture('github_clicked')
               }}
               className="inline-flex items-center gap-2 text-sm text-muted transition hover:text-accent"
             >
