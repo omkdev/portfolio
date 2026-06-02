@@ -89,6 +89,7 @@ export default function Navbar() {
   }
 
   return (
+    <>
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         onHero
@@ -147,39 +148,40 @@ export default function Navbar() {
           </button>
         </div>
       </nav>
-
-      {open && (
-        <div className="fixed inset-0 top-16 z-40 bg-black/92 backdrop-blur-md md:hidden">
-          <ul className="flex flex-col gap-1 px-6 py-8">
-            {navLinks.map((link) => {
-              const external = Boolean(link.external)
-              const isActive = !external && active === link.href.slice(1)
-              return (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    {...(external
-                      ? { target: '_blank', rel: 'noreferrer' }
-                      : {})}
-                    className={`block rounded-lg px-3 py-3 text-lg ${
-                      isActive
-                        ? 'bg-accent/10 font-medium text-accent'
-                        : 'text-white/60 hover:text-accent'
-                    }`}
-                    onClick={() => {
-                      setOpen(false)
-                      handleNavLinkClick(link.label, external)
-                    }}
-                  >
-                    {link.label}
-                    {external ? ' ↗' : ''}
-                  </a>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      )}
     </header>
+
+    {open && (
+      <div className="fixed inset-0 top-16 z-40 bg-black/92 backdrop-blur-md md:hidden">
+        <ul className="flex flex-col gap-1 px-6 py-8">
+          {navLinks.map((link) => {
+            const external = Boolean(link.external)
+            const isActive = !external && active === link.href.slice(1)
+            return (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  {...(external
+                    ? { target: '_blank', rel: 'noreferrer' }
+                    : {})}
+                  className={`block rounded-lg px-3 py-3 text-lg ${
+                    isActive
+                      ? 'bg-accent/10 font-medium text-accent'
+                      : 'text-white/60 hover:text-accent'
+                  }`}
+                  onClick={() => {
+                    setOpen(false)
+                    handleNavLinkClick(link.label, external)
+                  }}
+                >
+                  {link.label}
+                  {external ? ' ↗' : ''}
+                </a>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    )}
+    </>
   )
 }

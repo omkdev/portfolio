@@ -50,6 +50,7 @@ Copy `.env.example` to `.env` locally. On Vercel, set the same keys in **Project
 | `VITE_POSTHOG_HOST` | Client | PostHog API host |
 | `VITE_SENTRY_DSN` | Client | Sentry DSN |
 | `VITE_TURNSTILE_SITE_KEY` | Client | Turnstile site key |
+| `VITE_HERO_VIDEO_URL` | Client | Cloudinary hero background video URL |
 | `TURNSTILE_SECRET_KEY` | Server | Turnstile secret |
 | `UPSTASH_REDIS_REST_URL` | Server | Rate limit Redis |
 | `UPSTASH_REDIS_REST_TOKEN` | Server | Rate limit token |
@@ -70,12 +71,12 @@ Never commit real secrets. Use placeholders in `.env.example` only.
 | `api/contact.js` | Contact form serverless handler |
 | `public/` | Static assets |
 
-## Assets to add locally
+## Assets
 
-| File | Location | Used by |
-|------|----------|---------|
-| `HeroSectionVdo.mp4` | `src/assets/videos/` | Hero background (gradient fallback if missing) |
-| `resume.pdf` | `public/resume.pdf` | Set `socialLinks.resume` to `/resume.pdf` in `navLinks.js` |
+| Item | Notes |
+|------|--------|
+| Hero video | Hosted on **Cloudinary** — set `VITE_HERO_VIDEO_URL` (not bundled in the app) |
+| `resume.pdf` | Add to `public/resume.pdf` and set `socialLinks.resume` to `/resume.pdf` in `navLinks.js` |
 
 ## Stack
 

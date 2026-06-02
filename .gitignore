@@ -17,6 +17,9 @@ dist-ssr
 .env.*
 !.env.example
 
+# Large local hero video (use Cloudinary in production)
+src/assets/videos/*.mp4
+
 # Deployment
 .vercel
 
