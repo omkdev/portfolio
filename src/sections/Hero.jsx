@@ -2,8 +2,9 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { useState } from 'react'
 import { capture } from '../lib/posthog'
-import heroVideo from '../assets/videos/HeroSectionVdo.mp4'
 import { heroSocialLinks } from '../constants/navLinks'
+
+const heroVideoUrl = import.meta.env.VITE_HERO_VIDEO_URL
 import { defaultTransition, fadeUp } from '../lib/motion'
 
 const headline = [
@@ -20,7 +21,7 @@ const heroSubtitle = [
 export default function Hero() {
   const reduceMotion = useReducedMotion()
   const [videoFailed, setVideoFailed] = useState(false)
-  const showVideo = !reduceMotion && !videoFailed
+  const showVideo = Boolean(heroVideoUrl) && !reduceMotion && !videoFailed
 
   const handleSocialClick = (label) => {
     if (label === 'GitHub') {
@@ -45,7 +46,7 @@ export default function Hero() {
           aria-hidden="true"
           onError={() => setVideoFailed(true)}
         >
-          <source src={heroVideo} type="video/mp4" />
+          <source src={heroVideoUrl} type="video/mp4" />
         </video>
       ) : (
         <div className="absolute inset-0 bg-bg" />

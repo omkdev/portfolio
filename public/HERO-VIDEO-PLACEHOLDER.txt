@@ -1,2 +1,2 @@
-Hero video lives at src/assets/videos/HeroSectionVdo.mp4 (imported by Hero.jsx).
-This placeholder file can be deleted.
+Hero background video is loaded from Cloudinary via VITE_HERO_VIDEO_URL in .env.
+Optional local file (dev only): src/assets/videos/HeroSectionVdo.mp4 — not imported by the app.
