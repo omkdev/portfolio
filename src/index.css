@@ -42,6 +42,28 @@
     background-color: var(--color-bg);
   }
 
+  .hero-viewport {
+    height: 100dvh;
+    max-height: 100dvh;
+    min-height: 100dvh;
+  }
+
+  @supports (height: 100svh) {
+    .hero-viewport {
+      height: 100svh;
+      max-height: 100svh;
+      min-height: 100svh;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-viewport {
+      height: 100vh;
+      max-height: none;
+      min-height: 680px;
+    }
+  }
+
   .section-bg-alt {
     background-color: var(--color-bg-elevated);
   }

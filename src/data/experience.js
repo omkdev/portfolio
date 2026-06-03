@@ -31,7 +31,6 @@ export const experience = [
       '6 merged PRs across 3 repositories (Aurakriti, Vector social platform, Weatherify)',
     ],
     links: {
-      github: 'https://github.com/omkdev',
       showcase: 'https://github.com/adarshtiwaridev/Aurakriti/pull/55',
     },
   },
