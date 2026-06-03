@@ -158,7 +158,7 @@ export default function Hero({ heroVideoUrl = '' }) {
               </p>
             </div>
 
-            <h1 className="font-heading text-[clamp(1.35rem,5.2vw,4.5rem)] leading-[0.95] font-bold tracking-tight text-white uppercase">
+            <h1 className="font-heading text-[clamp(1.5rem,3.8vw,4.5rem)] leading-[0.95] font-bold tracking-tight text-white uppercase">
               {headline.map((line) => (
                 <span key={line.highlight} className="block">
                   {line.text}
