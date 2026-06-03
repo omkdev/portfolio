@@ -87,6 +87,26 @@
   .section-block {
     @apply border-t border-white/5 py-10 sm:py-12;
   }
+
+  .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--color-charcoal) 20%,
+      var(--color-bg-elevated) 50%,
+      var(--color-charcoal) 80%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.8s linear infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

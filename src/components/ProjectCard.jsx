@@ -5,6 +5,8 @@ import {
   ShieldCheck,
   ShoppingCart,
 } from 'lucide-react'
+import { useLayoutEffect, useRef, useState } from 'react'
+import Skeleton from './Skeleton'
 import { capture } from '../lib/posthog'
 
 const headerIcons = {
@@ -77,6 +79,41 @@ function DistributedArchitecture({ trunk, branches }) {
   )
 }
 
+function ProjectCardImage({ src, alt }) {
+  const [imageLoaded, setImageLoaded] = useState(false)
+  const imgRef = useRef(null)
+
+  useLayoutEffect(() => {
+    const img = imgRef.current
+
+    if (img?.complete && img.naturalWidth > 0) {
+      setImageLoaded(true)
+    }
+  }, [src])
+
+  return (
+    <div className="relative h-40 overflow-hidden border-b border-white/10">
+      <div
+        className={`absolute inset-0 transition-opacity duration-500 ease-out ${
+          imageLoaded ? 'opacity-0' : 'opacity-100'
+        }`}
+      >
+        <Skeleton className="h-full w-full rounded-none" />
+      </div>
+      <img
+        ref={imgRef}
+        src={src}
+        alt={alt}
+        loading="lazy"
+        onLoad={() => setImageLoaded(true)}
+        className={`absolute inset-0 object-cover transition-[opacity,transform] duration-500 ease-out ${
+          imageLoaded ? 'scale-100 opacity-100' : 'scale-[1.02] opacity-0'
+        }`}
+      />
+    </div>
+  )
+}
+
 function ArchitecturePreview({ architecture }) {
   const isDistributed = architecture && typeof architecture === 'object' && !Array.isArray(architecture)
 
@@ -113,14 +150,11 @@ export default function ProjectCard({ project, featured = false }) {
       }`}
     >
       {project.image ? (
-        <div className="border-b border-white/10">
-          <img
-            src={project.image}
-            alt={`${project.title} — Om Mahesh Kanse project preview`}
-            className="h-40 w-full object-cover object-center"
-            loading="lazy"
-          />
-        </div>
+        <ProjectCardImage
+          key={project.image}
+          src={project.image}
+          alt={`${project.title} — Om Mahesh Kanse project preview`}
+        />
       ) : (
         <div className={`border-b px-5 py-4 ${project.headerAccent ?? 'border-white/10 bg-bg-elevated'}`}>
           <div className="flex items-center gap-2">
