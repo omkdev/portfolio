@@ -1,11 +1,10 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Skeleton from '../components/Skeleton'
 import { capture } from '../lib/posthog'
 import { heroSocialLinks } from '../constants/navLinks'
 
-const heroVideoUrl = import.meta.env.VITE_HERO_VIDEO_URL
 import { defaultTransition, fadeUp } from '../lib/motion'
 
 const headline = [
@@ -19,17 +18,11 @@ const heroSubtitle = [
   'From auth flows to distributed backends.',
 ]
 
-export default function Hero() {
+export default function Hero({ heroVideoUrl = '' }) {
   const reduceMotion = useReducedMotion()
   const [videoFailed, setVideoFailed] = useState(false)
   const [videoReady, setVideoReady] = useState(false)
   const showVideo = Boolean(heroVideoUrl) && !reduceMotion && !videoFailed
-
-  useEffect(() => {
-    if (showVideo) {
-      setVideoReady(false)
-    }
-  }, [showVideo, heroVideoUrl])
 
   const markVideoReady = () => setVideoReady(true)
 

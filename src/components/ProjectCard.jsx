@@ -85,7 +85,6 @@ function ProjectCardImage({ src, alt }) {
 
   useLayoutEffect(() => {
     const img = imgRef.current
-    setImageLoaded(false)
 
     if (img?.complete && img.naturalWidth > 0) {
       setImageLoaded(true)
@@ -152,6 +151,7 @@ export default function ProjectCard({ project, featured = false }) {
     >
       {project.image ? (
         <ProjectCardImage
+          key={project.image}
           src={project.image}
           alt={`${project.title} — Om Mahesh Kanse project preview`}
         />
