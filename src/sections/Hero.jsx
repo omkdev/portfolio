@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import Skeleton from '../components/Skeleton'
 import { capture } from '../lib/posthog'
 import { heroSocialLinks } from '../constants/navLinks'
 
@@ -21,7 +22,16 @@ const heroSubtitle = [
 export default function Hero() {
   const reduceMotion = useReducedMotion()
   const [videoFailed, setVideoFailed] = useState(false)
+  const [videoReady, setVideoReady] = useState(false)
   const showVideo = Boolean(heroVideoUrl) && !reduceMotion && !videoFailed
+
+  useEffect(() => {
+    if (showVideo) {
+      setVideoReady(false)
+    }
+  }, [showVideo, heroVideoUrl])
+
+  const markVideoReady = () => setVideoReady(true)
 
   const handleSocialClick = (label) => {
     if (label === 'GitHub') {
@@ -36,18 +46,31 @@ export default function Hero() {
   return (
     <section id="home" className="section-bg relative h-screen min-h-[680px] overflow-hidden">
       {showVideo ? (
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className="absolute inset-0 h-full w-full scale-105 object-cover object-center"
-          aria-hidden="true"
-          onError={() => setVideoFailed(true)}
-        >
-          <source src={heroVideoUrl} type="video/mp4" />
-        </video>
+        <div className="absolute inset-0">
+          <div
+            className={`absolute inset-0 transition-opacity duration-700 ease-out ${
+              videoReady ? 'opacity-0' : 'opacity-100'
+            }`}
+          >
+            <Skeleton className="h-full w-full rounded-none" />
+          </div>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className={`absolute inset-0 object-cover transition-[opacity,transform] duration-700 ease-out ${
+              videoReady ? 'scale-[1.04] opacity-100' : 'scale-[1.02] opacity-0'
+            }`}
+            aria-hidden="true"
+            onLoadedData={markVideoReady}
+            onCanPlay={markVideoReady}
+            onError={() => setVideoFailed(true)}
+          >
+            <source src={heroVideoUrl} type="video/mp4" />
+          </video>
+        </div>
       ) : (
         <div className="absolute inset-0 bg-bg" />
       )}
