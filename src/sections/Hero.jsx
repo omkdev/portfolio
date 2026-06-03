@@ -129,7 +129,7 @@ export default function Hero({ heroVideoUrl = '' }) {
         <SocialLinks onLinkClick={handleSocialClick} animate />
       </aside>
 
-      <div className="absolute inset-0 z-10 flex h-full max-h-full min-h-0 flex-col justify-between overflow-y-auto overscroll-y-contain px-5 pt-16 pb-6 sm:px-8 sm:pb-8 lg:pointer-events-none lg:justify-end lg:overflow-visible lg:px-10 lg:pb-12 lg:pt-0">
+      <div className="absolute inset-0 z-10 flex h-full max-h-full min-h-0 flex-col justify-between overflow-visible px-5 pt-16 pb-6 sm:px-8 sm:pb-8 lg:pointer-events-none lg:justify-end lg:px-10 lg:pb-12 lg:pt-0">
         <div className="pointer-events-auto shrink-0 lg:hidden">
           <div className="flex flex-row flex-wrap gap-x-5 gap-y-2">
             <SocialLinks onLinkClick={handleSocialClick} />
