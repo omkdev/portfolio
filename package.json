@@ -11,6 +11,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/space-grotesk": "^5.2.10",
     "@marsidev/react-turnstile": "^1.5.2",
     "@sentry/react": "^10.55.0",
     "@upstash/ratelimit": "^2.0.8",
