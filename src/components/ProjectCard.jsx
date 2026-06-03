@@ -5,8 +5,14 @@ import {
   ShieldCheck,
   ShoppingCart,
 } from 'lucide-react'
+import PropTypes from 'prop-types'
 import { useLayoutEffect, useRef, useState } from 'react'
 import Skeleton from './Skeleton'
+import {
+  architectureBranchPropType,
+  architecturePropType,
+  projectPropType,
+} from './projectPropTypes'
 import { capture } from '../lib/posthog'
 
 const headerIcons = {
@@ -21,6 +27,10 @@ function ArchNode({ label }) {
       {label}
     </span>
   )
+}
+
+ArchNode.propTypes = {
+  label: PropTypes.string.isRequired,
 }
 
 function ArchArrow() {
@@ -44,6 +54,10 @@ function LinearArchitecture({ layers }) {
   )
 }
 
+LinearArchitecture.propTypes = {
+  layers: PropTypes.arrayOf(PropTypes.string).isRequired,
+}
+
 function DistributedArchitecture({ trunk, branches }) {
   return (
     <>
@@ -56,7 +70,7 @@ function DistributedArchitecture({ trunk, branches }) {
 
       <div className="mt-1 grid w-full max-w-xs grid-cols-2 gap-4 sm:max-w-sm">
         {branches.map((branch, index) => (
-          <div key={branch.label ?? branch.path[0]} className="flex flex-col items-center">
+          <div key={branch.label ?? branch.path?.[0]} className="flex flex-col items-center">
             <span className="mb-1 text-accent/70" aria-hidden="true">
               {index === 0 ? '↙' : '↘'}
             </span>
@@ -64,7 +78,7 @@ function DistributedArchitecture({ trunk, branches }) {
               <ArchNode label={branch.label} />
             ) : (
               <>
-                {branch.path.map((node, pathIndex) => (
+                {branch.path?.map((node, pathIndex) => (
                   <div key={node} className="flex flex-col items-center">
                     <ArchNode label={node} />
                     {pathIndex < branch.path.length - 1 && <ArchArrow />}
@@ -77,6 +91,11 @@ function DistributedArchitecture({ trunk, branches }) {
       </div>
     </>
   )
+}
+
+DistributedArchitecture.propTypes = {
+  trunk: PropTypes.arrayOf(PropTypes.string).isRequired,
+  branches: PropTypes.arrayOf(architectureBranchPropType).isRequired,
 }
 
 function ProjectCardImage({ src, alt }) {
@@ -114,6 +133,11 @@ function ProjectCardImage({ src, alt }) {
   )
 }
 
+ProjectCardImage.propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+}
+
 function ArchitecturePreview({ architecture }) {
   const isDistributed = architecture && typeof architecture === 'object' && !Array.isArray(architecture)
 
@@ -131,6 +155,10 @@ function ArchitecturePreview({ architecture }) {
   )
 }
 
+ArchitecturePreview.propTypes = {
+  architecture: architecturePropType.isRequired,
+}
+
 export default function ProjectCard({ project, featured = false }) {
   const HeaderIcon = headerIcons[project.headerIcon]
 
@@ -144,8 +172,7 @@ export default function ProjectCard({ project, featured = false }) {
 
   return (
     <article
-      onClick={handleProjectClick}
-      className={`glass flex h-full flex-col overflow-hidden rounded-xl cursor-pointer ${
+      className={`glass flex h-full flex-col overflow-hidden rounded-xl ${
         featured ? 'border-accent/30' : ''
       }`}
     >
@@ -181,9 +208,13 @@ export default function ProjectCard({ project, featured = false }) {
               </span>
             )}
           </div>
-          <h3 className="font-heading text-lg font-semibold leading-snug text-white">
+          <button
+            type="button"
+            onClick={handleProjectClick}
+            className="font-heading w-full text-left text-lg font-semibold leading-snug text-white transition hover:text-accent"
+          >
             {project.title}
-          </h3>
+          </button>
         </div>
 
         <div className="space-y-3 text-sm leading-relaxed">
@@ -250,4 +281,9 @@ export default function ProjectCard({ project, featured = false }) {
       </div>
     </article>
   )
+}
+
+ProjectCard.propTypes = {
+  project: projectPropType.isRequired,
+  featured: PropTypes.bool,
 }

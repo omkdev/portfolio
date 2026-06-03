@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { ArrowUpRight } from 'lucide-react'
 import SectionTitle from '../components/SectionTitle'
 import { experience } from '../data/experience'
 import { fadeUp, staggerContainer } from '../lib/motion'
@@ -11,7 +12,7 @@ export default function Experience() {
           eyebrow="Experience"
           title="Growth timeline"
           highlight="timeline"
-          subtitle="Intern → Associate Software Engineer at Trully Capital in 6 months."
+          subtitle="Intern → Associate at Trully Capital in 6 months · OSS security work via NSoC 2026."
         />
 
         <motion.div
@@ -66,6 +67,32 @@ export default function Experience() {
                     </li>
                   ))}
                 </ul>
+                {item.links && (
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    {item.links.github && (
+                      <a
+                        href={item.links.github}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition hover:text-accent-hover"
+                      >
+                        GitHub — omkdev
+                        <ArrowUpRight size={14} aria-hidden="true" />
+                      </a>
+                    )}
+                    {item.links.showcase && (
+                      <a
+                        href={item.links.showcase}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition hover:text-accent"
+                      >
+                        Security PR (Aurakriti)
+                        <ArrowUpRight size={14} aria-hidden="true" />
+                      </a>
+                    )}
+                  </div>
+                )}
               </motion.article>
             ))}
           </div>

@@ -18,6 +18,24 @@ export const experience = [
     ],
   },
   {
+    id: 'nsoc-oss',
+    role: 'Open Source Contributor',
+    company: 'Nexus Spring of Code (NSoC) 2026',
+    location: 'Remote',
+    period: 'May 2026',
+    description:
+      'Contributed security hardening and production fixes to open-source codebases through NSoC — Nexus Spring of Code, a structured open-source program for 2026.',
+    highlights: [
+      'Aurakriti (fintech-adjacent e-commerce): JWT hardening with jose, Upstash Redis rate limiting, CSRF protection, and Helmet with CSP/HSTS — merged security PR',
+      'Additional Aurakriti work: admin API exposure fix and atomic payment-verify locking to prevent duplicate orders',
+      '6 merged PRs across 3 repositories (Aurakriti, Vector social platform, Weatherify)',
+    ],
+    links: {
+      github: 'https://github.com/omkdev',
+      showcase: 'https://github.com/adarshtiwaridev/Aurakriti/pull/55',
+    },
+  },
+  {
     id: 'trully-intern',
     role: 'Software Engineer Intern',
     company: 'Trully Capital Fintech Pvt Ltd',
