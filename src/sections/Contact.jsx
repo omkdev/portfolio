@@ -215,9 +215,9 @@ export default function Contact() {
             )}
 
             {status === 'success' && (
-              <p className="text-sm text-accent" role="status">
+              <output className="block text-sm text-accent">
                 Thanks — your message was sent. I&apos;ll get back to you soon.
-              </p>
+              </output>
             )}
 
             {status === 'error' && (

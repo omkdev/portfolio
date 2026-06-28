@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 function renderTitle(title, highlight) {
   if (!highlight || !title.includes(highlight)) {
     return title
@@ -36,4 +38,12 @@ export default function SectionTitle({
       {subtitle && <p className="mt-3 text-muted">{subtitle}</p>}
     </div>
   )
+}
+
+SectionTitle.propTypes = {
+  eyebrow: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  highlight: PropTypes.string,
+  className: PropTypes.string,
 }

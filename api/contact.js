@@ -3,16 +3,24 @@ import { Redis } from '@upstash/redis'
 import { Ratelimit } from '@upstash/ratelimit'
 
 function isValidEmail(value) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+  const at = value.indexOf('@')
+  if (at <= 0) return false
+
+  const local = value.slice(0, at)
+  const domain = value.slice(at + 1)
+  if (!local || !domain) return false
+
+  const dot = domain.lastIndexOf('.')
+  return dot > 0 && dot < domain.length - 1
 }
 
 function escapeHtml(str) {
   return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;')
 }
 
 let ratelimit
@@ -170,7 +178,7 @@ export default async function handler(req, res) {
         <p><strong>Name:</strong> ${safeName}</p>
         <p><strong>Email:</strong> ${safeEmail}</p>
         <hr />
-        <p>${safeMessage.replace(/\n/g, '<br />')}</p>
+        <p>${safeMessage.replaceAll('\n', '<br />')}</p>
       `,
     })
 

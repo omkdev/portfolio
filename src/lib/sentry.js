@@ -12,8 +12,11 @@ export async function initSentry() {
     ],
     enableLogs: true,
     replaysSessionSampleRate: 0.05,
-    replaysOnErrorSampleRate: 1.0,
+    replaysOnErrorSampleRate: 1,
     sendDefaultPii: false,
+    ignoreErrors: [
+      /Failed to fetch dynamically imported module.*posthog/i,
+    ],
   })
 
   return Sentry

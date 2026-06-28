@@ -10,7 +10,6 @@ export default defineConfig({
         manualChunks(id) {
           if (id.includes('node_modules')) {
             if (id.includes('@sentry')) return 'vendor-sentry'
-            if (id.includes('posthog-js')) return 'vendor-posthog'
             if (id.includes('framer-motion')) return 'vendor-motion'
             if (id.includes('react-dom') || id.includes('react/')) return 'vendor-react'
           }
