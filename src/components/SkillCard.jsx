@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 export default function SkillCard({ title, skills }) {
   return (
     <div className="glass h-full rounded-xl p-6">
@@ -14,4 +16,9 @@ export default function SkillCard({ title, skills }) {
       </ul>
     </div>
   )
+}
+
+SkillCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  skills: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
